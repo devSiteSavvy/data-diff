@@ -119,11 +119,11 @@ class HashDiffer(TableDiffer):
                     table2._schema[c2] = col2.replace(precision=lowest.precision)
 
             elif isinstance(col1, ColType_UUID):
-                if not isinstance(col2, ColType_UUID):
+                if not isinstance(col2, ColType_UUID) and not isinstance(col2, StringType):
                     raise TypeError(f"Incompatible types for column '{c1}':  {col1} <-> {col2}")
 
             elif isinstance(col1, StringType):
-                if not isinstance(col2, StringType):
+                if not isinstance(col2, StringType) and not isinstance(col2, ColType_UUID):
                     raise TypeError(f"Incompatible types for column '{c1}':  {col1} <-> {col2}")
 
         for t in [table1, table2]:
